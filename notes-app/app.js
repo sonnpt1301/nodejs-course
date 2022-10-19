@@ -1,7 +1,9 @@
-const fs = require('fs');
-const getNotes = require('./notes')
-const { add, name } = require('./utils.js')
-const validator = require('validator').default
+import fs from 'fs'
+import { getNotes } from './notes.js'
+import { add, name } from './utils.js'
+import validator from 'validator'
+import chalk from 'chalk'
+import yards from 'yargs'
 
 // fs.writeFileSync('notes.txt', 'My name is Joker');
 // fs.appendFileSync('notes.txt', '\nHello to my course');
@@ -12,6 +14,15 @@ const validator = require('validator').default
 // const noteFile = fs.readFileSync('notes.txt', { encoding: 'utf8' });
 // const readNoteFile = getNotes(noteFile)
 // console.log(readNoteFile);
+// console.log(validator.isEmail('jokerboy1412@gmail.com'))
+// console.log(validator.isURL('https://google.com'))
+// console.log(chalk.green('Success!!!!!!!!!'))
 
-console.log(validator.isEmail('jokerboy1412@gmail.com'))
-console.log(validator.isURL('https://google.com'))
+console.log(yards.argv);
+const command = process.argv[2];
+console.log(process.argv)
+if (command == 'add') {
+    console.log('Adding note!');
+} else if (command == 'remove') {
+    console.log('Removing note!');
+}
