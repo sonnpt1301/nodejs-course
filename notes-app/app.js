@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { getNotes } from './notes.js'
+import { getNotes, addNote } from './notes.js'
 import { add, name } from './utils.js'
 import validator from 'validator'
 import chalk from 'chalk'
@@ -35,9 +35,8 @@ yargs.command({
             type: 'string'
         }
     },
-    handler: (argv) => {
-        console.log('Title: ', argv.title);
-        console.log('Body: ', argv.body);
+    handler: ({ title, body }) => {
+        addNote(title, body)
     }
 })
 
