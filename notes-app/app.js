@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { getNotes, addNote } from './notes.js'
+import { getNotes, addNote, removeNote, getNote, loadNotes } from './notes.js'
 import { add, name } from './utils.js'
 import validator from 'validator'
 import chalk from 'chalk'
@@ -44,8 +44,15 @@ yargs.command({
 yargs.command({
     command: 'remove',
     describe: 'Remove a new note',
-    handler: () => {
-        console.log('Removing a new note!');
+    builder: {
+        title: {
+            describe: 'Title of the note',
+            demandOption: true,
+            type: 'string'
+        }
+    },
+    handler: ({ title }) => {
+        removeNote(title)
     }
 })
 
@@ -53,8 +60,15 @@ yargs.command({
 yargs.command({
     command: 'read',
     describe: 'Read a note',
-    handler: () => {
-        console.log('Reading a note!');
+    builder: {
+        title: {
+            describe: 'Title of the note',
+            demandOption: true,
+            type: 'string'
+        }
+    },
+    handler: ({ title }) => {
+        getNote(title)
     }
 })
 
@@ -64,7 +78,7 @@ yargs.command({
     command: 'list',
     describe: 'List your notes',
     handler: () => {
-        console.log('Listing out all notes!');
+        loadNotes()
     }
 })
 
